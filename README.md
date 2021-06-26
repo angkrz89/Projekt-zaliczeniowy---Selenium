@@ -6,7 +6,7 @@ Tytuł: Próba dokonania zakupów przez użytkownika używając niepoprawnego ad
 
 Warunek wstępny: Uruchomiona przeglądarka. Użytkownik nie jest zarejestrowany.
 
-Kroki:
+<b>Kroki:</b>
 
 1. Wejdź na stronę "https://www.combat.pl/"
 2. Zamknij „cookies”
@@ -30,7 +30,7 @@ Kroki:
 20. Przewiń stronę do dołu
 21. Przejdź do płatności
 
-Oczekiwany rezultat:
+<b>Oczekiwany rezultat:</b>
 
 Zakupy nie powodzą się.
 Użytkownik dostaje informację, że wprowadzony e-mail jest niepoprawny.
@@ -39,6 +39,6 @@ Uruchomienie testu:
 
 $ python3 combat.py
 
-Uwagi końcowe:
+<b>Uwagi końcowe:</b>
 
 Automatyzacja przypadku testowego (test funkcjonalny) powiodła się. Test może być wrażliwy na zmianę struktury strony z powodu konieczności stosowania długich ścieżek w lokalizatorach XPATH i CSS Selector. Ponadto mogą występować problemy przy wyszukiwaniu, gdy zmianie ulegną nazwy produktów oraz w sytuacji, gdy nie będą one dostępne.
