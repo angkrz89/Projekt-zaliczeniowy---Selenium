@@ -35,7 +35,7 @@ Warunek wstępny: Uruchomiona przeglądarka. Użytkownik nie jest zarejestrowany
 Zakupy nie powodzą się.
 Użytkownik dostaje informację, że wprowadzony e-mail jest niepoprawny.
 
-Uruchomienie testu:
+<b>Uruchomienie testu:</b>
 
 $ python3 combat.py
 
