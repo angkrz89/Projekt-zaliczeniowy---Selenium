@@ -16,8 +16,11 @@ valid_phone_number = "22113344"
 
 invalid_email = "adcsea.com"
 
+
 # Scenariusz testowy:
 # Zakupy na stronie combat.pl
+
+
 class CombatShopping(unittest.TestCase):
     # Warunki wstepne:
     def setUp(self):
@@ -30,8 +33,8 @@ class CombatShopping(unittest.TestCase):
         # Włączenie implicitly wait - mechanizmu czekania na elementy max. 40 sekund
         self.driver.implicitly_wait(40)
 
-# Przypadek testowy 001:
-# Dokonanie zamówienia przy użyciu błędnego adresu e-mail
+    # Przypadek testowy 001:
+    # Dokonanie zamówienia przy użyciu błędnego adresu e-mail
     def testShoppingByInvalidEmail(self):
         driver = self.driver
         # Kroki
@@ -50,10 +53,10 @@ class CombatShopping(unittest.TestCase):
         add_btn = driver.find_element_by_xpath('//button[@title="Dodaj do koszyka"]')
         add_btn.click()
 
-	# Poczekaj 5 sekund
+        # Poczekaj 5 sekund
         sleep(5)
 
-	# 5. Wyszukaj "wiatrówka"
+        # 5. Wyszukaj "wiatrówka"
         search_input = driver.find_element_by_id('search')
         search_input.send_keys(valid_search2)
 
@@ -64,20 +67,20 @@ class CombatShopping(unittest.TestCase):
         add_btn = driver.find_element_by_xpath('//button[@title="Dodaj do koszyka"]')
         add_btn.click()
 
-	    # Poczekaj 5 sekund
+        # Poczekaj 5 sekund
         sleep(5)
 
-	    # 8. Przejdź do koszyka
+        # 8. Przejdź do koszyka
         basket_btn = driver.find_element_by_xpath('//a[@href="https://www.combat.pl/checkout/cart/"]')
         basket_btn.click()
 
         # 9. Przejdź do kasy
-        checkout_btn = driver.find_element_by_xpath('//button[@title="Przejdź do kasy"]').click()
+        driver.find_element_by_xpath('//button[@title="Przejdź do kasy"]').click()
 
-	    # Poczekaj 10 sekund
+        # Poczekaj 10 sekund
         sleep(10)
 
-	    # 10. Wpisz nieprawidłowy adres e-mail (brak znaku '@')
+        # 10. Wpisz nieprawidłowy adres e-mail (brak znaku '@')
         email_input = driver.find_element_by_id('customer-email')
         email_input.click()
         email_input.send_keys(invalid_email)
@@ -111,23 +114,23 @@ class CombatShopping(unittest.TestCase):
         phone_number_input.send_keys(valid_phone_number)
 
         # 18. Wybierz sposób dostawy: Kurier - płatność przy odbiorze
-        shipping_btn = driver.find_element_by_id('label_method_flatrate_flatrate').click()
+        driver.find_element_by_id('label_method_flatrate_flatrate').click()
 
         # Scroll page down
         html = driver.find_element_by_tag_name('html')
         html.send_keys(Keys.END)
 
         # 19. Przejdź do płatności
-        payment_btn = driver.find_element_by_xpath('//button[@data-role="opc-continue"]')
+        driver.find_element_by_xpath('//button[@data-role="opc-continue"]')
 
-	    # Wyszukuje wszystkie błędy
+        # Wyszukuje wszystkie błędy
         error_messages = driver.find_elements_by_css_selector('div#customer-email-error')
         # Tworzę listę WIDOCZNYCH błędów
-        visible_error_notices = list() # Pusta lista
+        visible_error_notices = list()  # Pusta lista
         for error in error_messages:
-        # Jeśli komunikat jest widoczny
+            # Jeśli komunikat jest widoczny
             if error.is_displayed():
-            	# Dodajemy ten komunikat do listy WIDOCZNYCH
+                # Dodajemy ten komunikat do listy WIDOCZNYCH
                 visible_error_notices.append(error)
 
         # Sprawdzam, czy ta lista WIDOCNYCH komunikatów zawiera tylko jeden błąd
@@ -135,14 +138,16 @@ class CombatShopping(unittest.TestCase):
         # Z wykorzystaniem unittesta
         self.assertEqual(len(visible_error_notices), 1, msg="Liczba widocznych komunikatów nie zgadza się!")
         # Sprawdzam treść błędu
-        self.assertEqual(visible_error_notices[0].text, "Prosimy wprowadzić poprawny adres email (np.: imie@nazwisko.com).")
+        self.assertEqual(visible_error_notices[0].text,
+                         "Prosimy wprowadzić poprawny adres email (np.: imie@nazwisko.com).")
 
-    	# Poczekaj 3 sekundy
+        # Poczekaj 3 sekundy
         sleep(3)
 
     def tearDown(self):
-    	# Zakonczenie testu
+        # Zakonczenie testu
         self.driver.quit()
+
 
 # Jeśli uruchamiamy z tego pliku
 if __name__ == "__main__":
